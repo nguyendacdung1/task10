@@ -40,9 +40,29 @@ where ProductCode=@ProductCode
 
 execute Product_code  'NT5'
 go
-create procedure PriceIncrease1
-  @UnitPrice money
-AS
+--tăng giá của tất cả các loại đồ chơi lên thêm 10000 .
 select*from ToyzUnlimited
-where  UnitPrice=@UnitPrice
-exec PriceIncrease1 ''
+go
+create procedure Priceincrease2
+       @Increase int = 10000
+as
+update ToyzUnlimited
+set UnitPrice += @Increase
+go
+execute Priceincrease2
+go
+select*from ToyzUnlimited
+go
+--giảm số lượng đồ chơi còn trong của hàng mỗi thứ 5 đơn vị
+select*from ToyzUnlimited
+go
+create procedure QtyOnHand
+      @QTY int = 5
+AS
+update ToyzUnlimited
+set QtyOnHand -=@QTY
+go
+execute QtyOnHand
+go
+select*from ToyzUnlimited
+go
